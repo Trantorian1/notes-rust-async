@@ -1,8 +1,11 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: A simple guide to Async Rust
+description: A beginner-friendly guide to async for those already familiar with the Rust programming language.
 theme: just-the-docs
+livereload: true
+mermaid: 
+  version: "10.9.0"
 
 url: https://just-the-docs.github.io
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  Repository: https://github.com/Trantorian1/notes-rust-async
