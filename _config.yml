@@ -5,7 +5,7 @@ livereload: true
 mermaid: 
   version: "10.9.0"
 
-url: https://just-the-docs.github.io
+url: https://trantorian1.github.io/async-rust-guide
 
 aux_links:
   Repository: https://github.com/Trantorian1/notes-rust-async
