@@ -8,4 +8,4 @@ permalink: /docs/async-execution
 
 # Async Execution
 
-In this section, we examine the underlying mechanisms behing asynchronous programing in a language-agnostic way.
+In this section, we examine the underlying mechanisms behing asynchronous programing.

@@ -14,13 +14,16 @@ A common pitfall of asynchronous code is how to handle task wake-up in an effici
 3. Events are checked in groups, for example using low-level os primitives such as `epoll`. This is a blocking operation inside of the *event loop.*
 4. When events complete, the *event loop* is unblocked and is allowed to move forwards in its execution, handling all the events that have completed. This triggers the *event callbacks* associated to each event that has completed.
 
->  ℹ️ `events` can be changes in the IO state, availability of another sub-task in a dependent task, updates to external services...
+{: .note }
+> `events` can be changes in the IO state, availability of another sub-task in a dependent task, updates to external services...
 
-Using events in such a way allows us to efficiently handle `async` **wakers** without requiring a dedicated thread to check requirements for every yielding task: when a task yields compute, it registers interest in the event which is blocking it's compute and sets a call to it's *waker* as the event callback. That way, when the event completes, the associated *waker* will be called and the task will be added back to the thread pool.
+Using events in such a way allows us to efficiently handle `async` **wakers** without requiring a dedicated thread to check requirements for every yielding task: when a task yields compute, it registers interest in the event which is blocking it's compute and sets a call to it's *waker* as the event callback. That way, when the event completes, the associated *waker* can be called and the task will be added back to the thread pool.
 
 ---
 
-## A typical Task lifetime with event callbacks
+## A typical Task lifecycle with event callbacks
+
+*The following diagram shows a tasks being added to the tread queue, repeatedly polled, yieled and woken up to completion.*
 
 ```mermaid
 sequenceDiagram
@@ -40,7 +43,7 @@ sequenceDiagram
         EX->>EX: Listens for events
         EX-->>WK: Calls
         destroy WK
-        WK-->>TQ: Pushes parent Task to the top of
+        WK-->>TQ: Pushes Task back onto
     end
 
     EX->>TQ: Polls
